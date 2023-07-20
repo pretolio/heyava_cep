@@ -12,9 +12,7 @@ class UserController extends DisposableProvider {
 
 
   Future<void> signIn(String email, String pass,) async {
-    await Future.delayed(Duration(seconds: 5));
     user = await _sources.signIn(email, pass);
-
     notifyListeners();
   }
 

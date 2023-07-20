@@ -22,6 +22,7 @@ class _LoginViewState extends State<LoginView> with TickerProviderStateMixin {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController(text: 'gabriel.mattos.web@gmail.com');
   final TextEditingController _passwordController = TextEditingController(text: '123');
+  final TextEditingController _cpasswordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool isSingIn = true;
 
@@ -84,7 +85,23 @@ class _LoginViewState extends State<LoginView> with TickerProviderStateMixin {
                       type: FormType.pass
                   ),
                   const SizedBox(height: 16),
-
+                  if(!isSingIn)
+                    Column(
+                      children: [
+                        CustomTextFormField.custom(
+                            controller: _cpasswordController,
+                            hintText: 'Digite sua senha',
+                            title: 'Confirmar Senha',
+                            type: FormType.pass,
+                            validator: (v){
+                              if(v != _passwordController.text){
+                                return 'Digite novamente sua senha';
+                              }
+                            }
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+                    ),
                   CustomButtom.custom(
                     expand: true,
                     onPressed: () async {

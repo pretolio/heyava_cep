@@ -15,7 +15,7 @@ class CustomTextFormField{
 
   static Widget custom({TextEditingController? controller, String? title, Widget? icon,
     void Function(String)? onFieldSubmitted, bool textAlign = false, bool isNext = false,
-    bool isBorder = false, bool isClean = false, String? hintText, bool? obscureText,
+    bool isBorder = false, bool isClean = false, String? hintText, bool? obscureText,int? maxLength,
     String? Function(String?)? validator, FormType type = FormType.text, TextInputType? keyboardType,
     double radius = 12, double? width, Color txtColor = Colors.black, bool enabled = true}){
 
@@ -40,6 +40,7 @@ class CustomTextFormField{
                   enabled: enabled,
                   style: TextStyle(fontSize: 12),
                   scrollPadding: EdgeInsets.zero,
+                  maxLength: maxLength,
                   onFieldSubmitted: onFieldSubmitted,
                   textInputAction: isNext ? TextInputAction.next : TextInputAction.done,
                   obscureText: obscureText ?? type == FormType.pass,
@@ -49,6 +50,7 @@ class CustomTextFormField{
                     suffixIcon: icon ?? (!isClean ? null : IconButton(onPressed: (){
                       controller?.clear();
                     }, icon: Icon(Icons.clear, color: ThemeColors.priColor,))),
+
                     fillColor: form.isError ? Colors.red.shade100 : ThemeColors.priColor.withOpacity(0.05), filled: true,
                     contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
                     border: OutlineInputBorder(borderSide:

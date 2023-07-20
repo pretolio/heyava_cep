@@ -21,6 +21,15 @@ class CepController extends DisposableProvider {
     return await _sourcesViaCep.getCep(cep);
   }
 
+  Future<int> deleteCep(int id) async {
+    final result = await _sourcesLocal.deleteCep(id);
+    if(result > 0){
+      listCeps.removeWhere((e) => e.id == id);
+      notifyListeners();
+    }
+    return result;
+  }
+
   Future<int> insertOrUpdateCep(CepModel cep, bool isUpdate) async {
     if(isUpdate){
       final result = await _sourcesLocal.updateCep(cep);
